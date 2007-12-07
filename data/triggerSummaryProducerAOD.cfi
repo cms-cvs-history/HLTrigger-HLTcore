@@ -1,5 +1,5 @@
 	module triggerSummaryProducerAOD = TriggerSummaryProducerAOD {
 		string processName = "@"
-		vInputTag collections = { }
-		vInputTag filters     = { }
+		VInputTag collections = { }
+		VInputTag filters     = { }
 	}

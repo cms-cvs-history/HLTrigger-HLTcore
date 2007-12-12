@@ -1,5 +1,6 @@
+include "HLTrigger/Configuration/data/HLTrigger_EventContent.cff"
+
 	module triggerSummaryProducerAOD = TriggerSummaryProducerAOD {
 		string processName = "@"
-		VInputTag collections = { }
-		VInputTag filters     = { }
+		using TriggerSummaryAOD
 	}

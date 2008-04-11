@@ -1,0 +1,3 @@
+	module triggerSummaryAnalyzerRAW = TriggerSummaryAnalyzerRAW {
+		InputTag inputTag = triggerSummaryProducerRAW
+	}

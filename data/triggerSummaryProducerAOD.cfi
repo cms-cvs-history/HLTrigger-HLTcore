@@ -1,6 +1,3 @@
-include "HLTrigger/Configuration/data/HLTrigger_EventContent.cff"
-
 	module triggerSummaryProducerAOD = TriggerSummaryProducerAOD {
 		string processName = "@"
-		using TriggerSummaryAOD
 	}

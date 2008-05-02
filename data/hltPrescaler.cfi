@@ -1,5 +1,1 @@
-	module hltPrescaler = HLTPrescaler {
-		bool   makeFilterObject = true
-		uint32 prescaleFactor = 1
-		uint32 eventOffset    = 0
-	}
+	module hltPrescaler = HLTPrescaler { }

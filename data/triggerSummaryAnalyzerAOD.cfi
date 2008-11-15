@@ -1,3 +1,0 @@
-	module triggerSummaryAnalyzerAOD = TriggerSummaryAnalyzerAOD {
-		InputTag inputTag = hltTriggerSummaryAOD
-	}

@@ -1,3 +1,0 @@
-	module triggerSummaryAnalyzerRAW = TriggerSummaryAnalyzerRAW {
-		InputTag inputTag = hltTriggerSummaryRAW
-	}

@@ -1,3 +1,0 @@
-	module triggerSummaryProducerAOD = TriggerSummaryProducerAOD {
-		string processName = "@"
-	}

@@ -11,6 +11,5 @@
  <use name=FWCore/Framework>
  <use name=FWCore/MessageLogger>
  <use name=FWCore/ServiceRegistry>
- <use name=HLTrigger/HLTcore>
  <flags EDM_PLUGIN=1>
 </library>

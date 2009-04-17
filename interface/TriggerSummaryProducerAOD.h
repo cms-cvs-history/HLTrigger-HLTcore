@@ -6,8 +6,8 @@
  *  
  *  This class is an EDProducer making the HLT summary object for AOD
  *
- *  $Date: 2008/05/19 13:16:46 $
- *  $Revision: 1.8 $
+ *  $Date: 2008/07/08 07:06:23 $
+ *  $Revision: 1.9 $
  *
  *  \author Martin Grunewald
  *
@@ -27,20 +27,14 @@
 #include "DataFormats/HLTReco/interface/TriggerObject.h"
 #include "DataFormats/HLTReco/interface/TriggerFilterObjectWithRefs.h"
 
-#include<string>
-#include<vector>
+#include <string>
+#include <vector>
 
 //
 // class declaration
 //
 
-struct TriggerInputTagComparison {
-  bool operator() (const edm::InputTag& lhs, const edm::InputTag& rhs) const {
-    return lhs.encode()<rhs.encode();
-  }
-};
-
-typedef std::set<edm::InputTag,TriggerInputTagComparison> InputTagSet;
+typedef trigger::TriggerFilterObjectWithRefs::InputTagSet InputTagSet;
 
 class TriggerSummaryProducerAOD : public edm::EDProducer {
   

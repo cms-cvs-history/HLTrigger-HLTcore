@@ -2,8 +2,8 @@
  *
  * See header file for documentation
  *
- *  $Date: 2008/09/29 09:30:21 $
- *  $Revision: 1.28 $
+ *  $Date: 2008/10/11 13:13:58 $
+ *  $Revision: 1.29 $
  *
  *  \author Martin Grunewald
  *
@@ -54,7 +54,6 @@ TriggerSummaryProducerAOD::TriggerSummaryProducerAOD(const edm::ParameterSet& ps
   pn_(ps.getParameter<std::string>("processName")),
   selector_(edm::ProcessNameSelector(pn_)),
   tns_(),
-  collectionTags_(),
   collectionTagsEvent_(),
   collectionTagsGlobal_(),
   filterTagsEvent_(),
@@ -125,25 +124,15 @@ TriggerSummaryProducerAOD::produce(edm::Event& iEvent, const edm::EventSetup& iS
    /// Record the InputTags of those L3 filters and L3 collections.
    maskFilters_.clear();
    maskFilters_.resize(nfob,false);
-   collectionTagsEvent_.clear();
+   collectionTagsEvent_ = trigger::TriggerFilterObjectWithRefs::getCollectionTags();
    filterTagsEvent_.clear();
-   for (size_type ifob=0; ifob!=nfob; ++ifob) {
-     maskFilters_[ifob]=false;
-     collectionTags_.clear();
-     fobs_[ifob]->getCollectionTags(collectionTags_);
-     const size_type ncol(collectionTags_.size());
-     if (ncol>0) {
-       maskFilters_[ifob]=true;
+   for (size_type ifob = 0; ifob != nfob; ++ifob) {
+     maskFilters_[ifob] = fobs_[ifob]->mask();
+     if (maskFilters_[ifob]) {
        const string& label    (fobs_[ifob].provenance()->moduleLabel());
        const string& instance (fobs_[ifob].provenance()->productInstanceName());
        const string& process  (fobs_[ifob].provenance()->processName());
-       filterTagsEvent_.insert(InputTag(label,instance,process));
-
-       for (size_type icol=0; icol!=ncol; ++icol) {
-	 const string&    label(collectionTags_[icol].label());
-	 const string& instance(collectionTags_[icol].instance());
-	 collectionTagsEvent_.insert(InputTag(label,instance,pn_));
-       }
+       filterTagsEvent_.insert(InputTag(label, instance, process));
      }
    }
    collectionTagsGlobal_.insert(collectionTagsEvent_.begin(),collectionTagsEvent_.end());

@@ -6,8 +6,8 @@
  *  
  *  This class is an EDProducer making the HLT summary object for AOD
  *
- *  $Date: 2008/07/08 07:06:23 $
- *  $Revision: 1.9 $
+ *  $Date: 2009/04/17 18:13:55 $
+ *  $Revision: 1.9.2.1 $
  *
  *  \author Martin Grunewald
  *
@@ -84,9 +84,6 @@ class TriggerSummaryProducerAOD : public edm::EDProducer {
   trigger::Keys keys_;
   /// ids
   trigger::Vids ids_;
-
-  /// packing decision
-  std::vector<bool> maskFilters_;
 
 };
 #endif

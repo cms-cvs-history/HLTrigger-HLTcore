@@ -2,8 +2,8 @@
  *
  * See header file for documentation
  *
- *  $Date: 2008/10/11 13:13:58 $
- *  $Revision: 1.29 $
+ *  $Date: 2009/04/17 18:13:55 $
+ *  $Revision: 1.29.2.1 $
  *
  *  \author Martin Grunewald
  *
@@ -63,8 +63,7 @@ TriggerSummaryProducerAOD::TriggerSummaryProducerAOD(const edm::ParameterSet& ps
   offset_(),
   fobs_(),
   keys_(),
-  ids_(),
-  maskFilters_()
+  ids_()
 {
   if (pn_=="@") {
     // use tns
@@ -122,19 +121,9 @@ TriggerSummaryProducerAOD::produce(edm::Event& iEvent, const edm::EventSetup& iS
    /// so, these are L3 collections to be packed up, and the
    /// corresponding filter is a L3 filter also to be packed up.
    /// Record the InputTags of those L3 filters and L3 collections.
-   maskFilters_.clear();
-   maskFilters_.resize(nfob,false);
    collectionTagsEvent_ = trigger::TriggerFilterObjectWithRefs::getCollectionTags();
-   filterTagsEvent_.clear();
-   for (size_type ifob = 0; ifob != nfob; ++ifob) {
-     maskFilters_[ifob] = fobs_[ifob]->mask();
-     if (maskFilters_[ifob]) {
-       const string& label    (fobs_[ifob].provenance()->moduleLabel());
-       const string& instance (fobs_[ifob].provenance()->productInstanceName());
-       const string& process  (fobs_[ifob].provenance()->processName());
-       filterTagsEvent_.insert(InputTag(label, instance, process));
-     }
-   }
+   filterTagsEvent_     = trigger::TriggerFilterObjectWithRefs::getFilterTags();
+
    collectionTagsGlobal_.insert(collectionTagsEvent_.begin(),collectionTagsEvent_.end());
    filterTagsGlobal_.insert(filterTagsEvent_.begin(),filterTagsEvent_.end());
 
@@ -198,7 +187,7 @@ TriggerSummaryProducerAOD::produce(edm::Event& iEvent, const edm::EventSetup& iS
 
    /// fill the L3 filter objects
    for (size_type ifob=0; ifob!=nfob; ++ifob) {
-     if (maskFilters_[ifob]) {
+     if (fobs_[ifob]->mask()) {
        const string& label    (fobs_[ifob].provenance()->moduleLabel());
        const string& instance (fobs_[ifob].provenance()->productInstanceName());
        const string& process  (fobs_[ifob].provenance()->processName());

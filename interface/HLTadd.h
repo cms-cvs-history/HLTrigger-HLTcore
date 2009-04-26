@@ -45,3 +45,24 @@ const std::string* moduleLabel() const {
     return 0;
   }
 }
+
+const std::string* processName() const {
+  edm::CurrentProcessingContext const* cpc(currentContext());
+  if (cpc!=0) {
+    return & cpc->moduleDescription()->processName();
+  } else {
+    return 0;
+  }
+}
+
+const edm::InputTag inputTag(const std::string & instance = "") const {
+  edm::CurrentProcessingContext const* cpc(currentContext());
+  if (cpc == NULL)
+    throw edm::Exception(edm::errors::LogicError) << "currentContext() used outside of the Event processing loop";
+
+  return edm::InputTag(
+    cpc->moduleDescription()->moduleLabel(),
+    instance,
+    cpc->moduleDescription()->processName()
+  );
+}

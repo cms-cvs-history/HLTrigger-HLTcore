@@ -8,8 +8,8 @@
  *  items. Any and all HLT filters must derive from the HLTFilter
  *  class!
  *
- *  $Date: 2006/08/14 14:52:51 $
- *  $Revision: 1.5 $
+ *  $Date: 2006/08/14 15:26:42 $
+ *  $Revision: 1.7 $
  *
  *  \author Martin Grunewald
  *
@@ -19,6 +19,7 @@
 #include "FWCore/Framework/interface/EDFilter.h"
 #include "FWCore/Framework/interface/CurrentProcessingContext.h"
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
+#include "FWCore/Utilities/interface/InputTag.h"
 
 //
 // class decleration

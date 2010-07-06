@@ -6,8 +6,8 @@
  *  
  *  This class provides access routines to get hold of the HLT Configuration
  *
- *  $Date: 2010/05/28 11:10:23 $
- *  $Revision: 1.27 $
+ *  $Date: 2010/03/17 07:15:17 $
+ *  $Revision: 1.25 $
  *
  *  \author Martin Grunewald
  *
@@ -32,25 +32,36 @@
 
 class HLTConfigProvider {
   
-
  public:
-  /// init method: call from beginRun(.) of your plugin
-  /// the parameter "changed" indicates whether the config has actually changed
-  bool init(const edm::Run& iRun, const edm::EventSetup& iSetup, const std::string& processName, bool& changed);
+
+  /// init methods - use one and only one!
+
+  /// very old, deprecated, may fail when processing file(s) containing
+  /// events accepted by different HLT tables!
+  bool init(const std::string& processName);
+
+  /// old, deprecated as well
+  /// the parameter "changed" indicates whether the config has
+  /// actually changed
+  bool init(const edm::Event& iEvent,                                              const std::string& processName, bool& changed);
+
+  /// new, revised, based on advice by Chris Jones (Feb.2010)
+  /// call from beginRun
+  bool init(const edm::Run& iRun,                   const edm::EventSetup& iSetup, const std::string& processName, bool& changed);
 
 
  private:
-  /// real init methods
-  bool init(const edm::ProcessHistory& iHistory, const edm::EventSetup& iSetup, const std::string& processName, bool& changed);
-  bool init(const edm::ProcessHistory& iHistory, const std::string& processName, bool& changed);
-  /// only for fallback on buggy old files:
-  bool init(const std::string& processNamey);
 
   /// clear data members - called by init() methods
   void clear();
 
+  /// real init methods
+  bool init(const edm::ProcessHistory& iHistory, const std::string& processName, bool& changed);
+  bool init(const edm::ProcessHistory& iHistory, const edm::EventSetup& iSetup, const std::string& processName, bool& changed);
+
   /// extract information into data members - called by init() methods
   void extract();
+  void extract(const edm::EventSetup& iSetup);
 
 
  public:

@@ -2,8 +2,8 @@
  *
  * See header file for documentation
  *
- *  $Date: 2010/03/31 07:44:25 $
- *  $Revision: 1.46 $
+ *  $Date: 2010/07/14 15:41:44 $
+ *  $Revision: 1.46.2.1 $
  *
  *  \author Martin Grunewald
  *
@@ -719,10 +719,10 @@ std::pair<int,int>  HLTConfigProvider::prescaleValues(const edm::Event& iEvent, 
     result.first = l1GtUtils_->prescaleFactor(iEvent,l1tname,l1error);
     if (l1error!=0) {
       edm::LogError("HLTConfigProvider")
-        << " Error in determining L1T prescale for HLT path: '" << trigger
-        << "' with L1T seed: '" << l1tname
-        << "' using L1GtUtils: error code: " << l1error
-        << ". (Note: only a single L1T name, not a bit number, is allowed as seed for a proper determination of the L1T prescale!)";
+	<< " Error in determining L1T prescale for HLT path: '" << trigger
+	<< "' with L1T seed: '" << l1tname
+	<< "' using L1GtUtils: error code: " << l1error
+	<< ". (Note: only a single L1T name, not a bit number, is allowed as seed for a proper determination of the L1T prescale!)";
       result.first = -1;
     }
   } else {

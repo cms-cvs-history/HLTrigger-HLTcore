@@ -6,8 +6,8 @@
  *  
  *  This class is an EDAnalyzer analyzing the combined HLT information for RAW
  *
- *  $Date: 2010/07/14 15:30:07 $
- *  $Revision: 1.6 $
+ *  $Date: 2010/02/19 14:26:53 $
+ *  $Revision: 1.5 $
  *
  *  \author Martin Grunewald
  *
